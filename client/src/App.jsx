@@ -1,0 +1,57 @@
+import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import CheckAuth from './components/common/CheckAuth';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkAuth } from './store/auth';
+import { useEffect } from 'react';
+
+// Importing layouts
+import MainLayout from './components/main/Layout';
+import AuthLayout from './components/auth/Layout';
+import AdminLayout from './components/admin/Layout';
+
+// Importing pages
+import Home from './pages/main/Home';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import Dashboard from './pages/admin/Dashboard';
+
+function App() {
+  // const user = {role:'user'};
+  // const isAuthenticated = false;
+  // const isLoading = false;
+
+  const {user,isAuthenticated,isLoading} = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  },[dispatch])
+
+  return (
+    <div className='flex flex-col overflow-hidden bg-white'>
+      <Routes>
+        <Route path='main' element={<CheckAuth isAuthenticated={isAuthenticated} user={user}>
+          <MainLayout />
+        </CheckAuth>}>
+        <Route path='home' element={<Home />}/>
+        </Route>
+
+        <Route path='auth' element={<CheckAuth isAuthenticated={isAuthenticated} user={user}>
+          <AuthLayout />
+        </CheckAuth>}>
+          <Route path='login' element={<Login/>}/>
+          <Route path='register' element={<Register/>}/>
+        </Route>
+
+        <Route path='admin' element={<CheckAuth isAuthenticated={isAuthenticated} user={user}>
+          <AdminLayout />
+        </CheckAuth>}>
+          <Route path='dashboard' element={<Dashboard/>}/>
+        </Route>
+      </Routes>
+    </div>
+  )
+}
+
+export default App
