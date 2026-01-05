@@ -179,7 +179,7 @@ const Home = () => {
                 size="lg"
                 className="bg-white cursor-pointer text-teal-600 hover:bg-teal-50 px-10 py-7 text-xl font-black shadow-2xl ripple-effect neon-border transform hover:scale-110 transition-all duration-300"
                 onClick={() =>
-                  navigate(isAuthenticated ? "/dashboard" : "/auth/register")
+                  navigate(isAuthenticated ? "/main/profile" : "/auth/register")
                 }
               >
                 <Zap className="w-6 h-6 mr-2 bounce-rotate" />
@@ -369,7 +369,7 @@ const Home = () => {
               size="lg"
               className="bg-white cursor-pointer text-teal-600 hover:bg-teal-50 px-12 py-8 text-2xl font-black shadow-2xl ripple-effect neon-border transform hover:scale-110 transition-all duration-300"
               onClick={() =>
-                navigate(isAuthenticated ? "/dashboard" : "/auth/register")
+                navigate(isAuthenticated ? "/main/profile" : "/auth/register")
               }
             >
               <Sparkles className="w-7 h-7 mr-3 wobble" />
